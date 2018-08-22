@@ -7,7 +7,7 @@
 
 <style>
 #austinmap {
-  height: 500px;
+  height: 600px;
 }
 </style>
 
