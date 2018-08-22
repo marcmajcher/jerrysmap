@@ -21,7 +21,7 @@ export default {
       attributionControl: false
     });
     const bounds = [[0, 0], [1000, 1000]];
-    const mapImage = L.imageOverlay("/img/mapgame-map.png", bounds).addTo(
+    const mapImage = L.imageOverlay("./img/mapgame-map.png", bounds).addTo(
       mymap
     );
     mymap.fitBounds(bounds);
