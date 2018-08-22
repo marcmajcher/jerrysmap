@@ -7,7 +7,7 @@
 
 <style>
 #mapgameid {
-  height: 600px;
+  height: 800px;
 }
 </style>
 
