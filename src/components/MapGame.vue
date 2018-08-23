@@ -20,6 +20,7 @@ export default {
     L.tileLayer(
       'img/{id}/tile_{z}_{x}_{y}.png',
       {
+        // tileSize: L.point(8, 10), TK
         attribution:
           'MapGame Google+ Community',
         maxZoom: 7,
