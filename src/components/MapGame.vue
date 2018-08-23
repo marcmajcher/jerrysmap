@@ -16,24 +16,14 @@
 
 export default {
   mounted: () => {
-    // const mymap = L.map("mapgameid", {
-    //   crs: L.CRS.Simple,
-    //   attributionControl: false
-    // });
-    // const bounds = [[0, 0], [1000, 1000]];
-    // const mapImage = L.imageOverlay("./img/mapgame-map.png", bounds).addTo(
-    //   mymap
-    // );
-    // mymap.fitBounds(bounds);
-
     const mymap = L.map('mapgameid').setView([0, 0], 0);
     L.tileLayer(
-      'img/{id}/{z}_{x}_{y}.png',
+      'img/{id}/tile_{z}_{x}_{y}.png',
       {
         attribution:
-          'noisy noise maker',
+          'MapGame Google+ Community',
         maxZoom: 2,
-        id: 'noise',
+        id: 'mapgame',
       },
     ).addTo(mymap);
   },
