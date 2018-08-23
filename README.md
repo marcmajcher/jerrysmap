@@ -4,6 +4,8 @@ This is an interactive map interface for [Jerry's Map](http://jerrysmap.com/).
 
 A demo is hosted at https://marcmajcher.github.io/jerrysmap/.
 
+![Jerry's Map](https://cdn.theatlantic.com/assets/media/video/img/upload/2011/09/screen-shot-2011-09-28-at-41252-pm-2/video-featured.png)
+
 ## Development Notes
 
 ### Project setup
