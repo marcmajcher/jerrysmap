@@ -16,15 +16,15 @@
 
 export default {
   mounted: () => {
-    const mymap = L.map('mapgameid').setView([68, -80], 3);
+    const mymap = L.map('mapgameid').setView([50, -70], 3);
     L.tileLayer(
       'img/{id}/tile_{z}_{x}_{y}.png',
       {
-        // tileSize: L.point(8, 10), TK
+       tileSize: L.point(320, 400), 
         attribution:
           'MapGame Google+ Community',
         maxZoom: 7,
-        minZoom: 1,
+        minZoom: 2,
         id: 'mapgame',
       },
     ).addTo(mymap);
