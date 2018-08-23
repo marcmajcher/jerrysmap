@@ -16,13 +16,14 @@
 
 export default {
   mounted: () => {
-    const mymap = L.map('mapgameid').setView([0, 0], 0);
+    const mymap = L.map('mapgameid').setView([68, -80], 3);
     L.tileLayer(
       'img/{id}/tile_{z}_{x}_{y}.png',
       {
         attribution:
           'MapGame Google+ Community',
-        maxZoom: 2,
+        maxZoom: 7,
+        minZoom: 1,
         id: 'mapgame',
       },
     ).addTo(mymap);
