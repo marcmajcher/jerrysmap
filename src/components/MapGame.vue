@@ -16,11 +16,16 @@
 
 export default {
   mounted: () => {
+    const center = L.latLng(-55.5, 66.5);
+    const nw = L.latLng(-6, 0);
+    // const ne = L.latLng(-6, 128);
+    const se = L.latLng(-123, 128);
+    // const sw = L.latLng(-123, 0);
 
-      const mymap = L.map('mapgameid', {
-      center: [-55.5,66.5],
+    const mymap = L.map('mapgameid', {
+      center,
       crs: L.CRS.Simple,
-      maxBounds: L.latLngBounds(L.latLng(-6, 0), L.latLng(-123, 128)),
+      maxBounds: L.latLngBounds(nw, se),
       maxZoom: 7,
       minZoom: 3,
       zoom: 3,
@@ -29,18 +34,12 @@ export default {
     L.tileLayer(
       'img/{id}/tile_{z}_{x}_{y}.png',
       {
-      //  tileSize: L.point(240, 300), 
+      //  tileSize: L.point(240, 300),
         attribution: 'MapGame Google+ Community',
         id: 'mapgame',
       },
     ).addTo(mymap);
-
-    const center = L.latLng(-55.5, 66.5);
-    const nw = L.latLng(-6, 0);
-    const ne = L.latLng(-6, 128);
-    const se = L.latLng(-123, 128);
-    const sw = L.latLng(-123, 0);
-  }
+  },
 };
 
 </script>

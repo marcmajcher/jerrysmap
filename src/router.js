@@ -13,9 +13,9 @@ export default new Router({
       component: () => import(/* webpackChunkName: "mapGame" */ './components/MapGame.vue'),
     },
     {
-      path: '/austin',
+      path: '/jm',
       name: 'austinMap',
-      component: () => import(/* webpackChunkName: "austinMap" */ './components/AustinMap.vue'),
+      component: () => import(/* webpackChunkName: "jerrysMap" */ './components/JerrysMap.vue'),
     },
   ],
 });
