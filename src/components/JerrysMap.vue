@@ -6,7 +6,7 @@
 </template>
 
 <style>
-#mapgameid {
+#jerrysmap {
   height: 800px;
 }
 </style>
@@ -16,11 +16,11 @@
 
 export default {
   mounted: () => {
-    const mymap = L.map('jerrysmap').setView([68, -80], 3);
+    const mymap = L.map('jerrysmap').setView([0, 0], 3);
     L.tileLayer(
-      'img/{id}/tile_{z}_{x}_{y}.png',
+      // 'img/mapgame/tile_{z}_{x}_{y}.png',
+      'img/{id}/tile_x_{x}_{y}.jpg',
       {
-      //  tileSize: L.point(240, 300), 
         attribution:
           'Jerry Gretzinger',
         maxZoom: 7,

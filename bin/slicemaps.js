@@ -1,17 +1,19 @@
 /* eslint-env node */
 /* eslint-disable */
 // resize each tile to 1024x1280, slice into 4x5 256px squares
-
+const fs = require('fs');
 const im = require('imagemagick');
 const indir = 'panels/2013'
-const outdir = 'zout';
+// const outdir = 'zout';
+const outdir = 'public/img/jerrysmap';
 
 // const infiles = ['n1e1.jpg', 'n1e2.jpg', 'n2e1.jpg'];
-const infiles = ['n1e2.jpg'];
+// const infiles = ['n1e2.jpg'];
 const xtiles = 4;
 const ytiles = -5;
 
-infiles.forEach(file => {
+// infiles.forEach(file => {
+fs.readdirSync(indir).filter(e => e.match(/^n\d+e\d+\.jpg$/)).forEach(file => {
     console.log(`FILE: ${file}`);
     let [_, n, e] = file.match(/^n(\d+)e(\d+)\.jpg$/);
     n = (parseInt(n)-1) * ytiles;

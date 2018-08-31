@@ -18,8 +18,8 @@ export default {
   mounted: () => {
     const center = L.latLng(-55.5, 66.5);
     const nw = L.latLng(-6, 0);
-    // const ne = L.latLng(-6, 128);
     const se = L.latLng(-123, 128);
+    // const ne = L.latLng(-6, 128);
     // const sw = L.latLng(-123, 0);
 
     const mymap = L.map('mapgameid', {
