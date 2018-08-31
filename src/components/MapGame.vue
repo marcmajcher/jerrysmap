@@ -9,18 +9,6 @@
 #mapgameid {
   height: 800px;
 }
-
-.leaflet-grid-label .lng {
-	margin-left: 8px;
-	-webkit-transform: rotate(90deg);
-	transform: rotate(90deg);
-}
-
-.leaflet-grid-label .lat, 
-.leaflet-grid-label .lng {
-	text-shadow: -2px 0 #FFFFFF, 0 2px #FFFFFF, 2px 0 #FFFFFF, 0 -2px #FFFFFF;
-}
-
 </style>
 
 <script>
