@@ -20,14 +20,14 @@ export default {
       center: [0,0],
       crs: L.CRS.Simple,
       // maxBounds: L.latLngBounds(nw, se),
-      maxZoom: 7,
+      maxZoom: 12,
       minZoom: 3,
-      zoom: 3,
+      zoom: 12,
       attribution: 'Jerry Gretzinger',
     });
 
     L.tileLayer(
-      'img/{id}/tile_x_{x}_{y}.jpg', {
+      'img/{id}/tile_{z}_{x}_{y}.jpg', {
         id: 'jerrysmap'
       },
     ).addTo(jmap);

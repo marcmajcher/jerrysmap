@@ -1,8 +1,8 @@
 /* eslint-env node */
 /* eslint-disable */
 // resize each tile to 1024x1280, slice into 4x5 256px squares
-const fs = require('fs');
-const im = require('imagemagick');
+const fs = require('fs').promises;
+const im = require('simple-imagemagick');
 const indir = 'panels/2013'
 // const outdir = 'zout';
 const outdir = 'public/img/jerrysmap';
@@ -11,36 +11,31 @@ const outdir = 'public/img/jerrysmap';
 // const infiles = ['n1e2.jpg'];
 const xtiles = 4;
 const ytiles = -5;
+const maxzoom = 12;
 
 // infiles.forEach(file => {
-fs.readdirSync(indir).filter(e => e.match(/^n\d+e\d+\.jpg$/)).forEach(file => {
-    console.log(`FILE: ${file}`);
-    let [_, n, e] = file.match(/^n(\d+)e(\d+)\.jpg$/);
-    n = (parseInt(n)-1) * ytiles;
-    e = (parseInt(e)-1) * xtiles;
+fs.readdir(indir)
+    .then(result => {
+        const files = result.filter(e => e.match(/^n\de\d\.jpg$/));
+        files.forEach(file => {
+            console.log(`FILE: ${file}`);
+            let [_, n, e] = file.match(/^n(\d+)e(\d+)\.jpg$/);
+            n = (parseInt(n) - 1) * ytiles;
+            e = (parseInt(e) - 1) * xtiles;
 
-    im.convert([`${indir}/${file}`, '-resize', '1024x1280', '-crop', '256x256',
-                '-set', 'filename:tile', `tile_x_%[fx:page.x/256 + ${e}]_%[fx:page.y/256 + ${n-4}]`,
-                `${outdir}/%[filename:tile].jpg`],
-        (err, stdout) => {
-            if (err) throw err;
-            console.log(file, 'done', stdout);
+            // deepest zoom
+            im.convert([`${indir}/${file}`, '-resize', '1024x1280', '-crop', '256x256',
+                    '-set', 'filename:tile', `tile_${maxzoom}_%[fx:page.x/256 + ${e}]_%[fx:page.y/256 + ${n-4}]`,
+                    `${outdir}/%[filename:tile].jpg`
+                ],
+                (err, stdout) => {
+                    if (err) {
+                        console.error('ERROR', err);
+                    }
+                    console.log(file, 'done', stdout);
+                });
         });
-
-    // if (_) {
-    //     for (let j = -4; j <= 0; j++) {
-    //         let ln = [];
-    //         for (let i = 0; i <= 3; i++) {
-    //             ln.push(`(${(x*xtiles)+i}, ${(y*ytiles)+j})`);
-    //         }
-    //         console.log(ln.join(' '));
-    //     }
-    // }
-    // console.log('--------------------------------');
-});
-
-
-
+    });
 // name tiles: (x,y)
 // n1e1 => lower left  = (0,0)
 //         lower right = (3,0)
