@@ -16,18 +16,21 @@
 
 export default {
   mounted: () => {
-    const mymap = L.map('jerrysmap').setView([0, 0], 3);
+    const jmap = L.map('jerrysmap', {
+      center: [0,0],
+      crs: L.CRS.Simple,
+      // maxBounds: L.latLngBounds(nw, se),
+      maxZoom: 7,
+      minZoom: 3,
+      zoom: 3,
+      attribution: 'Jerry Gretzinger',
+    });
+
     L.tileLayer(
-      // 'img/mapgame/tile_{z}_{x}_{y}.png',
-      'img/{id}/tile_x_{x}_{y}.jpg',
-      {
-        attribution:
-          'Jerry Gretzinger',
-        maxZoom: 7,
-        minZoom: 2,
-        id: 'jerrysmap',
+      'img/{id}/tile_x_{x}_{y}.jpg', {
+        id: 'jerrysmap'
       },
-    ).addTo(mymap);
+    ).addTo(jmap);
   },
 };
 </script>
