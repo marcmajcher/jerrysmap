@@ -9,6 +9,9 @@
 #jerrysmap {
   height: 800px;
 }
+.leaflet-container {
+    background-color:rgba(255,0,0,0.0);
+}
 </style>
 
 <script>

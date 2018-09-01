@@ -1,9 +1,0 @@
-#convert 'Master Map.psd[0]' -resize 4096 -crop '256x256' -set 'filename:tile' 'tile_5_%[fx:page.x/256]_%[fx:page.y/256]' +repage +adjoin 'tiles/%[filename:tile].png'
-#convert 'Master Map.psd[0]' -resize 2048 -crop '256x256' -set 'filename:tile' 'tile_4_%[fx:page.x/256]_%[fx:page.y/256]' +repage +adjoin 'tiles/%[filename:tile].png'
-#convert 'Master Map.psd[0]' -resize 1024 -crop '256x256' -set 'filename:tile' 'tile_3_%[fx:page.x/256]_%[fx:page.y/256]' +repage +adjoin 'tiles/%[filename:tile].png'
-#convert 'Master Map.psd[0]' -resize 512 -crop '256x256' -set 'filename:tile' 'tile_2_%[fx:page.x/256]_%[fx:page.y/256]' +repage +adjoin 'tiles/%[filename:tile].png'
-#convert 'Master Map.psd[0]' -resize 256 -crop '256x256' -set 'filename:tile' 'tile_1_%[fx:page.x/256]_%[fx:page.y/256]' +repage +adjoin 'tiles/%[filename:tile].png'
-
-rm zout/*
-convert panels/2013/n1e1.jpg -resize 1024x1280 -crop '256x256' 'zout/tile.jpg'
-ls zout
