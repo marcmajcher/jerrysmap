@@ -41,9 +41,9 @@ import vueSlider from 'vue-slider-component';
 
 export default {
   components: {
-    vueSlider
+    vueSlider,
   },
-  data () {
+  data() {
     return {
       year: 2014,
       sliderconf: {
@@ -55,11 +55,13 @@ export default {
         dotSize: 14,
         piecewise: true,
         piecewiseLabel: true,
-      }
+      },
     };
   },
   methods: {
-    updateMap: function () {
+    updateMap: function updateMap() {
+      // TK fix the blink
+      // https://stackoverflow.com/questions/39102191/how-to-update-redraw-a-grid-layer-without-blinking
       window.jml.options.year = this.year;
       window.jml.redraw();
     },
@@ -77,7 +79,8 @@ export default {
       zoom: 5,
     });
 
-    window.jml = L.tileLayer('img/{id}/{year}/tile_{z}_{x}_{y}.jpg', {
+    // window.jml = L.tileLayer('img/{id}/{year}/tile_{z}_{x}_{y}.jpg', {
+    window.jml = L.tileLayer('http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg', {
       attribution: 'Jerry Gretzinger',
       id: 'jerrysmap',
       year: '2015',
