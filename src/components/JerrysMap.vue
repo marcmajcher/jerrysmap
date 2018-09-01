@@ -2,7 +2,7 @@
   <div class="map">
     <h1>Jerry's Map {{ year }}</h1>
     <div class="slider">
-    <vue-slider v-bind="sliderconf" v-model="year"></vue-slider>
+    <vue-slider v-bind="sliderconf" v-model="year" v-on:callback="updateMap()"></vue-slider>
     </div>
     <div id="jerrysmap"></div>
   </div>
@@ -31,7 +31,7 @@ leaflet-grid-label .lng {
 
 .slider {
   width: 400px;
-  margin: 0px auto;
+  margin: 0px auto 40px auto;
 }
 </style>
 
@@ -45,7 +45,7 @@ export default {
   },
   data () {
     return {
-      year: 2013,
+      year: 2014,
       sliderconf: {
         min: 2013,
         max: 2015,
@@ -59,12 +59,10 @@ export default {
     };
   },
   methods: {
-    dragEnd () {
-      console.log("BLABAB")
+    updateMap: function () {
+      window.jml.options.year = this.year;
+      window.jml.redraw();
     },
-    'drag-end': () => {
-      console.log("ASDGASGASDG")
-    }
   },
   mounted: () => {
     const center = L.latLng([13, 9]);
