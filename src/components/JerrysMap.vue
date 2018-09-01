@@ -44,9 +44,10 @@ export default {
       zoom: 4,
     });
 
-    L.tileLayer('img/{id}/tile_{z}_{x}_{y}.jpg', {
+    L.tileLayer('img/{id}/{year}/tile_{z}_{x}_{y}.jpg', {
       attribution: 'Jerry Gretzinger',
       id: 'jerrysmap',
+      year: '2013',
     }).addTo(jmap);
     // L.grid().addTo(jmap);
   },

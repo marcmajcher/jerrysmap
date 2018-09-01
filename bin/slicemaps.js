@@ -1,13 +1,21 @@
+#!/usr/local/bin/node
+
 /* eslint-env node */
 /* eslint-disable radix, no-param-reassign, no-plusplus, max-len, no-loop-func */
 // resize each tile to 1024x1280, slice into 4x5 256px squares
+
+if (!process.argv[2] || !Number.isInteger(process.argv[2])) {
+  console.warn('  Usage: slicemaps.js [year]');
+  process.exit();
+}
 
 const fs = require('fs');
 const im = require('simple-imagemagick');
 
 const fsp = fs.promises;
-const indir = 'panels/2013';
-const outdir = 'public/img/jerrysmap';
+const year = process.argv[2];
+const indir = `panels/${year}`;
+const outdir = `public/img/jerrysmap/${year}`;
 
 const xtiles = 4;
 const ytiles = -5;
@@ -30,7 +38,7 @@ function montageZoomTiles(zoomLevel) {
         return a;
       }, {
         x: 0,
-        y: 0
+        y: 0,
       });
 
       let montageCount = 0;
@@ -65,6 +73,10 @@ function montageZoomTiles(zoomLevel) {
 }
 
 function makeTilesFromPanels() {
+  if (!fs.existsSync(outdir)) {
+    fs.mkdirSync(outdir);
+  }
+
   fsp.readdir(indir)
     .then((result) => {
       // const files = result.filter(e => e.match(/^n\d+e\d+\.jpg$/));
@@ -85,11 +97,10 @@ function makeTilesFromPanels() {
             '-set', 'filename:tile', `tile_${maxzoom}_%[fx:page.x/256 + ${e}]_%[fx:page.y/256 + ${n + ytiles}]`,
             `${outdir}/%[filename:tile].jpg`,
           ],
-          (err, stdout) => {
+          (err) => {
             if (err) {
               console.error('ERROR', err);
             }
-            // console.log(file, 'done', stdout);
             fileCount -= 1;
             if (fileCount === 0) {
               montageZoomTiles(maxzoom);
