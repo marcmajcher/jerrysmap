@@ -1,6 +1,6 @@
 <template>
   <div class="map">
-    <h1>Map Demo</h1>
+    <h1>Map Game Demo</h1>
     <div id="mapgameid"></div>
   </div>
 </template>
@@ -19,8 +19,6 @@ export default {
     const center = L.latLng(-55.5, 66.5);
     const nw = L.latLng(-6, 0);
     const se = L.latLng(-123, 128);
-    // const ne = L.latLng(-6, 128);
-    // const sw = L.latLng(-123, 0);
 
     const mymap = L.map('mapgameid', {
       center,
@@ -34,7 +32,6 @@ export default {
     L.tileLayer(
       'img/{id}/tile_{z}_{x}_{y}.png',
       {
-      //  tileSize: L.point(240, 300),
         attribution: 'MapGame Google+ Community',
         id: 'mapgame',
       },

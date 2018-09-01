@@ -1,6 +1,6 @@
 <template>
   <div class="map">
-    <h1>Map Demo</h1>
+    <h1>Jerry's Map</h1>
     <div id="jerrysmap"></div>
   </div>
 </template>
@@ -42,10 +42,12 @@ export default {
       maxZoom: 9,
       minZoom: 4,
       zoom: 4,
-      attribution: 'Jerry Gretzinger',
     });
 
-    L.tileLayer('img/jerrysmap/tile_{z}_{x}_{y}.jpg').addTo(jmap);
+    L.tileLayer('img/{id}/tile_{z}_{x}_{y}.jpg', {
+      attribution: 'Jerry Gretzinger',
+      id: 'jerrysmap',
+    }).addTo(jmap);
     // L.grid().addTo(jmap);
   },
 };
