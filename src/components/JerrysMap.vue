@@ -41,13 +41,13 @@ export default {
       maxBounds: L.latLngBounds(nw, se),
       maxZoom: 9,
       minZoom: 4,
-      zoom: 4,
+      zoom: 5,
     });
 
     L.tileLayer('img/{id}/{year}/tile_{z}_{x}_{y}.jpg', {
       attribution: 'Jerry Gretzinger',
       id: 'jerrysmap',
-      year: '2013',
+      year: '2015',
     }).addTo(jmap);
     // L.grid().addTo(jmap);
   },

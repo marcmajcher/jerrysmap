@@ -4,7 +4,7 @@
 /* eslint-disable radix, no-param-reassign, no-plusplus, max-len, no-loop-func */
 // resize each tile to 1024x1280, slice into 4x5 256px squares
 
-if (!process.argv[2] || !Number.isInteger(process.argv[2])) {
+if (!process.argv[2] || !process.argv[2].match(/^\d{4}$/)) {
   console.warn('  Usage: slicemaps.js [year]');
   process.exit();
 }
