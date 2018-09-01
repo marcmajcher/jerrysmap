@@ -12,6 +12,19 @@
 .leaflet-container {
     background-color:rgba(255,0,0,0.0);
 }
+/* .leaflet-tile-loaded {
+  border: 1px solid red;
+} */
+leaflet-grid-label .lng {
+  margin-left: 8px;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.leaflet-grid-label .lat,
+.leaflet-grid-label .lng {
+  text-shadow: -2px 0 #FFFFFF, 0 2px #FFFFFF, 2px 0 #FFFFFF, 0 -2px #FFFFFF;
+}
 </style>
 
 <script>
@@ -19,21 +32,21 @@
 
 export default {
   mounted: () => {
+    const center = L.latLng([13, 9]);
+    const nw = L.latLng([22.5, 0]);
+    const se = L.latLng([0, 18]);
     const jmap = L.map('jerrysmap', {
-      center: [0,0],
+      center,
       crs: L.CRS.Simple,
-      // maxBounds: L.latLngBounds(nw, se),
-      maxZoom: 12,
-      minZoom: 3,
-      zoom: 12,
+      maxBounds: L.latLngBounds(nw, se),
+      maxZoom: 9,
+      minZoom: 4,
+      zoom: 4,
       attribution: 'Jerry Gretzinger',
     });
 
-    L.tileLayer(
-      'img/{id}/tile_{z}_{x}_{y}.jpg', {
-        id: 'jerrysmap'
-      },
-    ).addTo(jmap);
+    L.tileLayer('img/jerrysmap/tile_{z}_{x}_{y}.jpg').addTo(jmap);
+    // L.grid().addTo(jmap);
   },
 };
 </script>

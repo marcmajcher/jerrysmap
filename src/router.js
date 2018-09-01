@@ -8,13 +8,13 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'mapGame',
+      path: '/mapgame',
+      name: 'mapgame',
       component: () => import(/* webpackChunkName: "mapGame" */ './components/MapGame.vue'),
     },
     {
-      path: '/jm',
-      name: 'austinMap',
+      path: '/',
+      name: 'jerrysmap',
       component: () => import(/* webpackChunkName: "jerrysMap" */ './components/JerrysMap.vue'),
     },
   ],
