@@ -1,6 +1,9 @@
 <template>
   <div class="map">
-    <h1>Jerry's Map</h1>
+    <h1>Jerry's Map {{ year }}</h1>
+    <div class="slider">
+    <vue-slider v-bind="sliderconf" v-model="year"></vue-slider>
+    </div>
     <div id="jerrysmap"></div>
   </div>
 </template>
@@ -25,12 +28,44 @@ leaflet-grid-label .lng {
 .leaflet-grid-label .lng {
   text-shadow: -2px 0 #FFFFFF, 0 2px #FFFFFF, 2px 0 #FFFFFF, 0 -2px #FFFFFF;
 }
+
+.slider {
+  width: 400px;
+  margin: 0px auto;
+}
 </style>
 
 <script>
 /* globals L */
+import vueSlider from 'vue-slider-component';
 
 export default {
+  components: {
+    vueSlider
+  },
+  data () {
+    return {
+      year: 2013,
+      sliderconf: {
+        min: 2013,
+        max: 2015,
+        lazy: true,
+        tooltip: false,
+        height: 4,
+        dotSize: 14,
+        piecewise: true,
+        piecewiseLabel: true,
+      }
+    };
+  },
+  methods: {
+    dragEnd () {
+      console.log("BLABAB")
+    },
+    'drag-end': () => {
+      console.log("ASDGASGASDG")
+    }
+  },
   mounted: () => {
     const center = L.latLng([13, 9]);
     const nw = L.latLng([22.5, 0]);
@@ -44,7 +79,7 @@ export default {
       zoom: 5,
     });
 
-    L.tileLayer('img/{id}/{year}/tile_{z}_{x}_{y}.jpg', {
+    window.jml = L.tileLayer('img/{id}/{year}/tile_{z}_{x}_{y}.jpg', {
       attribution: 'Jerry Gretzinger',
       id: 'jerrysmap',
       year: '2015',
