@@ -13,7 +13,7 @@
   height: 800px;
 }
 .leaflet-container {
-    background-color:rgba(255,0,0,0.0);
+  background-color: rgba(255, 0, 0, 0);
 }
 /* .leaflet-tile-loaded {
   border: 1px solid red;
@@ -26,7 +26,7 @@ leaflet-grid-label .lng {
 
 .leaflet-grid-label .lat,
 .leaflet-grid-label .lng {
-  text-shadow: -2px 0 #FFFFFF, 0 2px #FFFFFF, 2px 0 #FFFFFF, 0 -2px #FFFFFF;
+  text-shadow: -2px 0 #ffffff, 0 2px #ffffff, 2px 0 #ffffff, 0 -2px #ffffff;
 }
 
 .slider {
@@ -37,11 +37,11 @@ leaflet-grid-label .lng {
 
 <script>
 /* globals L */
-import vueSlider from 'vue-slider-component';
+import vueSlider from "vue-slider-component";
 
 export default {
   components: {
-    vueSlider,
+    vueSlider
   },
   data() {
     return {
@@ -54,38 +54,53 @@ export default {
         height: 4,
         dotSize: 14,
         piecewise: true,
-        piecewiseLabel: true,
-      },
+        piecewiseLabel: true
+      }
     };
   },
+
   methods: {
     updateMap: function updateMap() {
-      // TK fix the blink
-      // https://stackoverflow.com/questions/39102191/how-to-update-redraw-a-grid-layer-without-blinking
       window.jml.options.year = this.year;
+
+      window.jmlPreventFlash.bringToFront();
+      window.jml.on("load", function(e) {
+        window.jml.bringToFront();
+      });
+
       window.jml.redraw();
-    },
+    }
   },
   mounted: () => {
     const center = L.latLng([13, 28]);
     const sw = L.latLng([-10, -10]);
     const ne = L.latLng([95, 75]);
-    const jmap = L.map('jerrysmap', {
+    const jmap = L.map("jerrysmap", {
       center,
       crs: L.CRS.Simple,
       maxBounds: L.latLngBounds(sw, ne),
       maxZoom: 9,
       minZoom: 3,
-      zoom: 5,
+      zoom: 5
     });
 
+    const jmlOptions = {
+      attribution: "Jerry Gretzinger",
+      id: "jerrysmap",
+      year: "2013"
+    };
+
     // window.jml = L.tileLayer('img/{id}/{year}/tile_{z}_{x}_{y}.jpg', {
-    window.jml = L.tileLayer('http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg', {
-      attribution: 'Jerry Gretzinger',
-      id: 'jerrysmap',
-      year: '2013',
-    }).addTo(jmap);
+    window.jml = L.tileLayer(
+      "http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg",
+      jmlOptions
+    ).addTo(jmap);
+
+    window.jmlPreventFlash = L.tileLayer(
+      "http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg",
+      jmlOptions
+    ).addTo(jmap);
     // L.grid().addTo(jmap);
-  },
+  }
 };
 </script>
