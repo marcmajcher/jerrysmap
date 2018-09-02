@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      year: 2014,
+      year: 2013,
       sliderconf: {
         min: 2013,
         max: 2015,
@@ -68,12 +68,12 @@ export default {
   },
   mounted: () => {
     const center = L.latLng([13, 9]);
-    const nw = L.latLng([22.5, 0]);
-    const se = L.latLng([0, 18]);
+    const sw = L.latLng([0, 0]);
+    const ne = L.latLng([85, 65]);
     const jmap = L.map('jerrysmap', {
       center,
       crs: L.CRS.Simple,
-      maxBounds: L.latLngBounds(nw, se),
+      maxBounds: L.latLngBounds(sw, ne),
       maxZoom: 9,
       minZoom: 4,
       zoom: 5,
@@ -83,7 +83,7 @@ export default {
     // window.jml = L.tileLayer('http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg', {
       attribution: 'Jerry Gretzinger',
       id: 'jerrysmap',
-      year: '2015',
+      year: '2013',
     }).addTo(jmap);
     // L.grid().addTo(jmap);
   },

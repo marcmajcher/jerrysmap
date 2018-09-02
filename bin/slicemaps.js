@@ -25,14 +25,14 @@ const outdir = `public/img/jerrysmap/${year}`;
 const X_TILES = 4;
 const Y_TILES = -5;
 const MAX_ZOOM = 9;
-const MIN_ZOOM = 3;
+const MIN_ZOOM = 2;
 
 function montageZoomTiles(zoomLevel) { // zoomLevel is the current zoom level, not the new one
   const newZoomLevel = zoomLevel - 1;
   const buffer = new ProcessBuffer();
   buffer.callback = () => {
     console.log(`* Done with zoom level ${zoomLevel}`);
-    if (newZoomLevel < MIN_ZOOM) {
+    if (newZoomLevel > MIN_ZOOM) {
       montageZoomTiles(newZoomLevel);
     }
   };
