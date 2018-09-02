@@ -79,8 +79,8 @@ export default {
       zoom: 5,
     });
 
-    // window.jml = L.tileLayer('img/{id}/{year}/tile_{z}_{x}_{y}.jpg', {
-    window.jml = L.tileLayer('http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg', {
+    window.jml = L.tileLayer('img/{id}/{year}/tile_{z}_{x}_{y}.jpg', {
+    // window.jml = L.tileLayer('http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg', {
       attribution: 'Jerry Gretzinger',
       id: 'jerrysmap',
       year: '2015',
