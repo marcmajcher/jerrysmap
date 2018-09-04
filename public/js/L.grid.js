@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 L.Grid = L.LayerGroup.extend({
   options: {
     xticks: 8,

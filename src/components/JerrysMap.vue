@@ -15,9 +15,6 @@
 .leaflet-container {
   background-color: rgba(255, 0, 0, 0);
 }
-/* .leaflet-tile-loaded {
-  border: 1px solid red;
-} */
 leaflet-grid-label .lng {
   margin-left: 8px;
   -webkit-transform: rotate(90deg);
@@ -37,7 +34,8 @@ leaflet-grid-label .lng {
 
 <script>
 /* globals L */
-import vueSlider from "vue-slider-component";
+/* eslint-disable comma-dangle */
+import vueSlider from 'vue-slider-component';
 
 export default {
   components: {
@@ -64,7 +62,7 @@ export default {
       window.jml.options.year = this.year;
 
       window.jmlPreventFlash.bringToFront();
-      window.jml.on("load", function(e) {
+      window.jml.on('load', () => {
         window.jml.bringToFront();
       });
 
@@ -75,29 +73,33 @@ export default {
     const center = L.latLng([13, 28]);
     const sw = L.latLng([-10, -10]);
     const ne = L.latLng([95, 75]);
-    const jmap = L.map("jerrysmap", {
+    const jmap = L.map('jerrysmap', {
       center,
       crs: L.CRS.Simple,
+      fullscreenControl: true,
+      fullscreenControlOptions: {
+        position: 'topleft'
+      },
       maxBounds: L.latLngBounds(sw, ne),
       maxZoom: 9,
       minZoom: 3,
-      zoom: 5
+      zoom: 5,
     });
 
     const jmlOptions = {
-      attribution: "Jerry Gretzinger",
-      id: "jerrysmap",
-      year: "2013"
+      attribution: 'Jerry Gretzinger',
+      id: 'jerrysmap',
+      year: '2013'
     };
 
     // window.jml = L.tileLayer('img/{id}/{year}/tile_{z}_{x}_{y}.jpg', {
     window.jml = L.tileLayer(
-      "http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg",
+      'http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg',
       jmlOptions
     ).addTo(jmap);
 
     window.jmlPreventFlash = L.tileLayer(
-      "http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg",
+      'http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg',
       jmlOptions
     ).addTo(jmap);
     // L.grid().addTo(jmap);
