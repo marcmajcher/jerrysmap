@@ -61,11 +61,6 @@ export default {
     updateMap: function updateMap() {
       window.jml.options.year = this.year;
 
-      window.jmlPreventFlash.bringToFront();
-      window.jml.on('load', () => {
-        window.jml.bringToFront();
-      });
-
       window.jml.redraw();
     }
   },
@@ -92,16 +87,21 @@ export default {
       year: '2013'
     };
 
-    // window.jml = L.tileLayer('img/{id}/{year}/tile_{z}_{x}_{y}.jpg', {
-    window.jml = L.tileLayer(
+    window.jmlNoFlash = L.tileLayer(
       'http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg',
       jmlOptions
     ).addTo(jmap);
 
-    window.jmlPreventFlash = L.tileLayer(
+    window.jml = L.tileLayer(
       'http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg',
       jmlOptions
-    ).addTo(jmap);
+    ).addTo(jmap).on('load', () => {
+      setTimeout(() => {
+        window.jmlNoFlash.options.year = window.jml.options.year;
+        window.jmlNoFlash.redraw();
+      }, 250);
+    });
+
     // L.grid().addTo(jmap);
   }
 };
