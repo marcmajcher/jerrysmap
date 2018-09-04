@@ -60,7 +60,6 @@ export default {
   methods: {
     updateMap: function updateMap() {
       window.jml.options.year = this.year;
-
       window.jml.redraw();
     }
   },
