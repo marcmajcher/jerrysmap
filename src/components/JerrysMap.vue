@@ -85,6 +85,7 @@ export default {
     const jmlOptions = {
       attribution: 'Jerry Gretzinger',
       id: 'jerrysmap',
+      noWrap: true,
       year: '2013'
     };
 
