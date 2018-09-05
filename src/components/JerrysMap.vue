@@ -53,17 +53,19 @@ export default {
         dotSize: 14,
         piecewise: true,
         piecewiseLabel: true
-      }
+      },
+      jml: undefined,
+      jmlNoFlash: undefined,
     };
   },
 
   methods: {
-    updateMap: function updateMap() {
-      window.jml.options.year = this.year;
-      window.jml.redraw();
+    updateMap () {      
+      this.jml.options.year = this.year;
+      this.jml.redraw();
     }
   },
-  mounted: () => {
+  mounted () {
     const center = L.latLng([13, 28]);
     const sw = L.latLng([-10, -10]);
     const ne = L.latLng([95, 75]);
@@ -86,22 +88,22 @@ export default {
       year: '2013'
     };
 
-    window.jmlNoFlash = L.tileLayer(
+    this.jmlNoFlash = L.tileLayer(
       'http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg',
       jmlOptions
     ).addTo(jmap);
 
-    window.jml = L.tileLayer(
+    this.jml = L.tileLayer(
       'http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg',
       jmlOptions
     ).addTo(jmap).on('load', () => {
       setTimeout(() => {
-        window.jmlNoFlash.options.year = window.jml.options.year;
-        window.jmlNoFlash.redraw();
+        this.jmlNoFlash.options.year = this.jml.options.year;
+        this.jmlNoFlash.redraw();
       }, 250);
     });
 
-    // L.grid().addTo(jmap);
+// L.grid().addTo(jmap);
   }
 };
 </script>
