@@ -13,9 +13,9 @@ if (!process.argv[2] || !process.argv[2].match(/^\d{4}$/)) {
   process.exit();
 }
 
-const panelFilter = (process.argv[3] === 'one') ? /^n1e1\.jpg$/ :
-                    (process.argv[3] === 'ten') ? /^n\de\d\.jpg$/ :
-                                                  /^n\d+e\d+\.jpg$/;
+const panelFilter = (process.argv[3] === 'one') ? /^[ns]1[ew]1\.jpg$/ :
+                    (process.argv[3] === 'ten') ? /^[ns]\d[ew]\d\.jpg$/ :
+                                                  /^[ns]\d+[ew]\d+\.jpg$/;
 
 const fsp = fs.promises;
 const year = process.argv[2];
@@ -122,6 +122,7 @@ function makeTilesFromPanels() {
     .then((result) => {
       const files = result.filter(e => e.match(panelFilter));
       createNETiles(files);
+      // createNWTiles(files);
     });
 }
 

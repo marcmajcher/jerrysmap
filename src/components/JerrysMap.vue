@@ -30,12 +30,26 @@ leaflet-grid-label .lng {
   width: 400px;
   margin: 0px auto 40px auto;
 }
+/*
+.leaflet-fade-anim {
+    opacity: 0;
+    -webkit-transition: opacity 10s linear;
+    -moz-transition: opacity 10s linear;
+    transition: opacity 10s linear;
+     border: 10px solid green 
+}
+
+.leaflet-fade-anim {
+    opacity: 1;
+} */
 </style>
 
 <script>
 /* globals L */
 /* eslint-disable comma-dangle */
 import vueSlider from 'vue-slider-component';
+// const tileUrl = 'http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg';
+const tileUrl = '/img/jerrysmap/{year}/tile_{z}_{x}_{y}.jpg';
 
 export default {
   components: {
@@ -90,13 +104,11 @@ export default {
     };
 
     this.jmlNoFlash = L.tileLayer(
-      'http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg',
-      jmlOptions
+      tileUrl, jmlOptions
     ).addTo(jmap);
 
     this.jml = L.tileLayer(
-      'http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg',
-      jmlOptions
+      tileUrl, jmlOptions
     ).addTo(jmap).on('load', () => {
       setTimeout(() => {
         this.jmlNoFlash.options.year = this.jml.options.year;
