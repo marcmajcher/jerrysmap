@@ -120,7 +120,7 @@ export default {
       }, 250);
     });
 
-L.grid().addTo(jmap);
+  // L.grid().addTo(jmap);
   }
 };
 </script>

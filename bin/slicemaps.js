@@ -1,7 +1,7 @@
 #!/usr/local/bin/node
 
 /* eslint-env node */
-/* eslint-disable radix, no-param-reassign, no-plusplus, max-len, no-loop-func, indent, no-nested-ternary, no-multi-spaces */
+/* eslint-disable radix, no-param-reassign, no-plusplus, max-len, no-loop-func, indent, no-nested-ternary, no-multi-spaces, prefer-destructuring */
 // resize each tile to 1024x1280, slice into 4x5 256px squares
 
 const fs = require('fs');
@@ -14,8 +14,9 @@ if (!process.argv[2] || !process.argv[2].match(/^\d{4}$/)) {
 }
 
 const panelFilter = (process.argv[3] === 'one') ? /^[ns]1[ew]1\.jpg$/ :
-  (process.argv[3] === 'ten') ? /^[ns]\d[ew]\d\.jpg$/ :
-  /^[ns]\d+[ew]\d+\.jpg$/;
+                    (process.argv[3] === 'two') ? /^[ns][12][ew][12]\.jpg$/ :
+                    (process.argv[3] === 'ten') ? /^[ns]\d[ew]\d\.jpg$/ :
+                                                  /^[ns]\d+[ew]\d+\.jpg$/;
 
 const fsp = fs.promises;
 const year = process.argv[2];
@@ -65,16 +66,6 @@ function montageZoomTiles(zoomLevel) { // zoomLevel is the current zoom level, n
     .then((result) => {
       const zoomRx = new RegExp(`^tile_${zoomLevel}_(-?\\d+)_(-?\\d+).jpg$`);
       const files = result.filter(e => e.match(zoomRx));
-      console.log('working on', files);
-      const maxes = files.reduce((a, c) => { // we're in the NE, so max X and min Y
-        const [, x, y] = c.match(zoomRx);
-        a.x = (parseInt(x) > a.x) ? parseInt(x) : a.x;
-        a.y = (parseInt(y) < a.y) ? parseInt(y) : a.y;
-        return a;
-      }, {
-        x: 0,
-        y: 0,
-      });
 
       const bounds = files.reduce((a, c) => {
         const [, x, y] = c.match(zoomRx);
@@ -93,15 +84,20 @@ function montageZoomTiles(zoomLevel) { // zoomLevel is the current zoom level, n
           y: 0,
         },
       });
-console.log('bounds',bounds);
-      for (let x = 0; x <= maxes.x; x += 2) {
-        for (let y = -1; y >= maxes.y; y -= 2) {
-          const outFile = `${outdir}/tile_${newZoomLevel}_${x / 2}_${Math.ceil((y / 2) - 1)}.jpg`;
+
+      bounds.min.x = Math.floor(bounds.min.x / 2) * 2;
+      bounds.min.y = Math.floor(bounds.min.y / 2) * 2;
+      bounds.max.x = Math.floor(bounds.max.x / 2) * 2;
+      bounds.max.y = Math.floor(bounds.max.y / 2) * 2;
+
+      for (let x = bounds.min.x; x <= bounds.max.x; x += 2) {
+        for (let y = bounds.min.y; y <= bounds.max.y; y += 2) {
+          const outFile = `${outdir}/tile_${newZoomLevel}_${x / 2}_${Math.ceil(y / 2)}.jpg`;
           const montageFiles = [
-            `${outdir}/tile_${zoomLevel}_${x}_${y - 1}.jpg`,
-            `${outdir}/tile_${zoomLevel}_${x + 1}_${y - 1}.jpg`,
             `${outdir}/tile_${zoomLevel}_${x}_${y}.jpg`,
             `${outdir}/tile_${zoomLevel}_${x + 1}_${y}.jpg`,
+            `${outdir}/tile_${zoomLevel}_${x}_${y + 1}.jpg`,
+            `${outdir}/tile_${zoomLevel}_${x + 1}_${y + 1}.jpg`,
           ].map(e => (fs.existsSync(e) ? e : 'null:'));
 
           buffer.add((cb) => {
