@@ -46,7 +46,7 @@ leaflet-grid-label .lng {
 
 <script>
 /* globals L */
-/* eslint-disable comma-dangle */
+/* eslint-disable commaa-dangle */
 import vueSlider from 'vue-slider-component';
 // const tileUrl = 'http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg';
 const tileUrl = '/img/jerrysmap/{year}/tile_{z}_{x}_{y}.jpg';
@@ -60,7 +60,7 @@ export default {
       year: 2013,
       sliderconf: {
         min: 2013,
-        max: 2015,
+        max: 2016,
         lazy: true,
         tooltip: false,
         height: 4,
@@ -80,12 +80,9 @@ export default {
     }
   },
   mounted () {
-    // const center = L.latLng([13, 28]);
-    const center = L.latLng(0,0);
-    // const sw = L.latLng([-10, -10]);
-    // const ne = L.latLng([95, 75]);
-    const sw = L.latLng([-110, -110]);
-    const ne = L.latLng([195, 175]);
+    const center = L.latLng(-25, 0);
+    const sw = L.latLng([-5, -70]);
+    const ne = L.latLng([-90, 70]);
     const jmap = L.map('jerrysmap', {
       center,
       crs: L.CRS.Simple,
@@ -96,8 +93,7 @@ export default {
       maxBounds: L.latLngBounds(sw, ne),
       maxZoom: 9,
       minZoom: 3,
-      // zoom: 5,
-      zoom: 7,
+      zoom: 5,
     });
 
     const jmlOptions = {
@@ -120,7 +116,7 @@ export default {
       }, 250);
     });
 
-  // L.grid().addTo(jmap);
+  L.grid().addTo(jmap);
   }
 };
 </script>
