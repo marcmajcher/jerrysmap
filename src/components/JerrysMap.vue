@@ -80,9 +80,9 @@ export default {
     }
   },
   mounted () {
-    const center = L.latLng(-25, 0);
-    const sw = L.latLng([-5, -70]);
-    const ne = L.latLng([-90, 70]);
+    const center = L.latLng(25, 0);
+    const sw = L.latLng([-10, -70]);
+    const ne = L.latLng([90, 70]);
     const jmap = L.map('jerrysmap', {
       center,
       crs: L.CRS.Simple,
