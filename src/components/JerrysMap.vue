@@ -36,7 +36,7 @@ leaflet-grid-label .lng {
     -webkit-transition: opacity 10s linear;
     -moz-transition: opacity 10s linear;
     transition: opacity 10s linear;
-     border: 10px solid green 
+     border: 10px solid green
 }
 
 .leaflet-fade-anim {
@@ -48,12 +48,13 @@ leaflet-grid-label .lng {
 /* globals L */
 /* eslint-disable commaa-dangle */
 import vueSlider from 'vue-slider-component';
-// const tileUrl = 'http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg';
-const tileUrl = '/img/jerrysmap/{year}/tile_{z}_{x}_{y}.jpg';
+
+const tileUrl = 'http://static.majcher.com/jmt/{year}/tile_{z}_{x}_{y}.jpg';
+// const tileUrl = '/img/jerrysmap/{year}/tile_{z}_{x}_{y}.jpg';
 
 export default {
   components: {
-    vueSlider
+    vueSlider,
   },
   data() {
     return {
@@ -66,7 +67,7 @@ export default {
         height: 4,
         dotSize: 14,
         piecewise: true,
-        piecewiseLabel: true
+        piecewiseLabel: true,
       },
       jml: undefined,
       jmlNoFlash: undefined,
@@ -74,12 +75,12 @@ export default {
   },
 
   methods: {
-    updateMap () {      
+    updateMap() {
       this.jml.options.year = this.year;
       this.jml.redraw();
-    }
+    },
   },
-  mounted () {
+  mounted() {
     const center = L.latLng(25, 0);
     const sw = L.latLng([-10, -70]);
     const ne = L.latLng([90, 70]);
@@ -88,7 +89,7 @@ export default {
       crs: L.CRS.Simple,
       fullscreenControl: true,
       fullscreenControlOptions: {
-        position: 'topleft'
+        position: 'topleft',
       },
       maxBounds: L.latLngBounds(sw, ne),
       maxZoom: 9,
@@ -100,23 +101,21 @@ export default {
       attribution: 'Jerry Gretzinger',
       id: 'jerrysmap',
       noWrap: true,
-      year: '2013'
+      year: '2013',
     };
 
-    this.jmlNoFlash = L.tileLayer(
-      tileUrl, jmlOptions
-    ).addTo(jmap);
+    this.jmlNoFlash = L.tileLayer(tileUrl, jmlOptions).addTo(jmap);
 
-    this.jml = L.tileLayer(
-      tileUrl, jmlOptions
-    ).addTo(jmap).on('load', () => {
-      setTimeout(() => {
-        this.jmlNoFlash.options.year = this.jml.options.year;
-        this.jmlNoFlash.redraw();
-      }, 250);
-    });
+    this.jml = L.tileLayer(tileUrl, jmlOptions)
+      .addTo(jmap)
+      .on('load', () => {
+        setTimeout(() => {
+          this.jmlNoFlash.options.year = this.jml.options.year;
+          this.jmlNoFlash.redraw();
+        }, 250);
+      });
 
-  L.grid().addTo(jmap);
-  }
+    // L.grid().addTo(jmap);
+  },
 };
 </script>
