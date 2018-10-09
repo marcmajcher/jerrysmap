@@ -13,10 +13,10 @@ if (!process.argv[2] || !process.argv[2].match(/^\d{4}$/)) {
   process.exit();
 }
 
-const panelFilter = (process.argv[3] === 'one') ? /^[ns]1[ew]1\.jpg$/ :
-                    (process.argv[3] === 'two') ? /^[ns][12][ew][12]\.jpg$/ :
-                    (process.argv[3] === 'ten') ? /^[ns]\d[ew]\d\.jpg$/ :
-                                                  /^[ns]\d+[ew]\d+\.jpg$/;
+const panelFilter = (process.argv[3] === 'one') ? /^[ns]1[ew]1\.jpg$/i :
+                    (process.argv[3] === 'two') ? /^[ns][12][ew][12]\.jpg$/i :
+                    (process.argv[3] === 'ten') ? /^[ns]\d[ew]\d\.jpg$/i :
+                                                  /^[ns]\d+[ew]\d+\.jpg$/i;
 
 const fsp = fs.promises;
 const year = process.argv[2];

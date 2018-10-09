@@ -61,7 +61,7 @@ export default {
       year: 2013,
       sliderconf: {
         min: 2013,
-        max: 2016,
+        max: 2015,
         lazy: true,
         tooltip: false,
         height: 4,
@@ -81,8 +81,8 @@ export default {
     },
   },
   mounted() {
-    const center = L.latLng(25, 0);
-    const sw = L.latLng([-10, -70]);
+    const center = L.latLng(0, 0);
+    const sw = L.latLng([-90, -70]);
     const ne = L.latLng([90, 70]);
     const jmap = L.map('jerrysmap', {
       center,
